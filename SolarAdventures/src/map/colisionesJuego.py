@@ -1,7 +1,8 @@
 import pygame
 class Colisiones:
-    
-    def colisionNave(protagonista,escena1,escena2,escena3):
+    def __init__(self):
+        pass
+    def colisionNave(self,protagonista,escena1,escena2,escena3):
         if(escena1):
             if(protagonista.rect.x<50 and protagonista.rect.y>301 and protagonista.rect.y<800):
                 protagonista.rect.x=60
@@ -54,12 +55,12 @@ class Colisiones:
                 protagonista.rect.x=560
             if(protagonista.rect.y<370 and protagonista.rect.y>100 and protagonista.rect.x>580 and protagonista.rect.x<760):
                 protagonista.rect.y=380
-    def colisionesMapa(flecha):
+    def colisionesMapa(self,flecha):
         if(flecha.rect.x<-10):
             flecha.rect.x=0
         if(flecha.rect.x>800):
             flecha.rect.x=790
-    def colisionesLuna(protagonista,nave,luna1,luna2,luna3,luna4,luna5,luna6):
+    def colisionesLuna(self,protagonista,nave,luna1,luna2,luna3,luna4,luna5,luna6):
         if(luna1==True):
             if(protagonista.rect.x>680):
                 protagonista.rect.x=670
@@ -99,7 +100,7 @@ class Colisiones:
             if(protagonista.rect.y>675):
                 protagonista.rect.y=665
                 
-    def colisionesMarte(protagonista,nave,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,primeraParaiso,segundaParaiso):
+    def colisionesMarte(self,protagonista,nave,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,primeraParaiso,segundaParaiso):
         if(marte1):
             if(protagonista.rect.y<35):
                 protagonista.rect.y=45
@@ -173,7 +174,7 @@ class Colisiones:
             if(protagonista.rect.y<5):
                 protagonista.rect.y = 15
 
-    def colisionesConMeteorito(protagonista,meteorito1,meteorito2,meteorito4,meteorito3,arreglos,espacio1,espacio2,espacio3):
+    def colisionesConMeteorito(self,protagonista,meteorito1,meteorito2,meteorito4,meteorito3,arreglos,espacio1,espacio2,espacio3):
         if(espacio1==True):
             if(protagonista.rect.y>meteorito1.rect.y-20 and protagonista.rect.y<(meteorito1.rect.y+60) and protagonista.rect.x>510 and protagonista.rect.x<630):
                 arreglos-=15
@@ -190,7 +191,7 @@ class Colisiones:
                 meteorito4.rect.y = -100
         return arreglos
     #Funcion para las colisiones de la nave con los bordes
-    def colisionesNave(protagonista,espacio1,espacio3):
+    def colisionesNave(self,protagonista,espacio1,espacio3):
         if(espacio1==True):
             if(protagonista.rect.x>736):
                 protagonista.rect.x = 726
@@ -202,7 +203,7 @@ class Colisiones:
         if(protagonista.rect.y>736):
             protagonista.rect.y = 726
     
-    def colisionesUrano(protagonista,nave,urano1,urano2,urano3,urano4):
+    def colisionesUrano(self,protagonista,nave,urano1,urano2,urano3,urano4):
         if(urano1==True):
             if(protagonista.rect.y<25):
                 protagonista.rect.y = 35
@@ -236,7 +237,7 @@ class Colisiones:
             if(protagonista.rect.y<25):
                 protagonista.rect.y = 35 
 
-    def colisionesPluton(protagonista,nave,pluton1,pluton2):
+    def colisionesPluton(self,protagonista,nave,pluton1,pluton2):
         if(pluton1):
             if(protagonista.rect.x>(nave.rect.x-50) and protagonista.rect.x<(nave.rect.x-40) and protagonista.rect.y>(nave.rect.y-20) and protagonista.rect.y<(nave.rect.y+237)):
                 protagonista.rect.x = nave.rect.x - 60

@@ -1,8 +1,10 @@
 import pygame
 import random
-from mensajesJuego import Texto
-class iteracciones:
-    def iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escena1,escena2,escena3,contadorIteraccion,mapa,distribuidor):
+from message_utils.mensajesJuego import Texto
+class Iteracciones:
+    def __init__(self) -> None:
+        pass
+    def iteraccionesNave(self,screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escena1,escena2,escena3,contadorIteraccion,mapa,distribuidor):
         teclaPulsada = pygame.key.get_pressed()
         #Balas
         if(protagonista.rect.x>540 and protagonista.rect.x<580 and protagonista.rect.y>100 and protagonista.rect.y<360 and escena3==True):
@@ -61,7 +63,7 @@ class iteracciones:
 
         return balas,gasolina,bidones,arreglo,piezas,vida,escena1,escena2,escena3,contadorIteraccion,mapa
 
-    def iteraccionesMapa(screen,flecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton):
+    def iteraccionesMapa(self,screen,flecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton):
         if(flecha.rect.x>680 and flecha.rect.x<760):
             infoSol.draw(screen)
         if(flecha.rect.x>630 and flecha.rect.x<650):
@@ -83,7 +85,7 @@ class iteracciones:
         if(flecha.rect.x>5 and flecha.rect.x<17):
             infoPluton.draw(screen)   
 
-    def iteraccionesLuna(screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escena1,cogerBidon,cogerPieza,cogerPropulsor,bidones,piezas,secretoLuna,mostrarInyector,inyector):
+    def iteraccionesLuna(self,screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escena1,cogerBidon,cogerPieza,cogerPropulsor,bidones,piezas,secretoLuna,mostrarInyector,inyector):
         teclaPulsada = pygame.key.get_pressed()
         if(protagonista.rect.y>430 and protagonista.rect.y<470 and protagonista.rect.x>530 and protagonista.rect.x<620 and luna1==True):
             Texto.mensajesIteraccionesLuna(screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escena1,cogerPieza,cogerBidon,cogerPropulsor,secretoLuna)
@@ -118,7 +120,7 @@ class iteracciones:
 
         return volverNave,cogerPieza,piezas,cogerBidon,bidones,cogerPropulsor,secretoLuna,mostrarInyector
     
-    def iteraccionesMarte(screen,protagonista,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,vida,bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,escena1,escena3,mostrarCarta,entrarParaiso,carta1,carta2,paraiso,primeraParaiso):
+    def iteraccionesMarte(self,screen,protagonista,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,vida,bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,escena1,escena3,mostrarCarta,entrarParaiso,carta1,carta2,paraiso,primeraParaiso):
         teclaPulsada = pygame.key.get_pressed()
         if(marte1):
             
@@ -212,7 +214,7 @@ class iteracciones:
         
         return bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,vida,mostrarCarta,entrarParaiso,paraiso,primeraParaiso
     
-    def iteraccionesParaiso(screen,protagonista,paraiso,primeraParaiso,segundaParaiso,mensajeSoporteVital,soporteVital,mostrarSoporte,mostrar,vida,piezas,carta3,carta4,saquear,marte4):
+    def iteraccionesParaiso(self,screen,protagonista,paraiso,primeraParaiso,segundaParaiso,mensajeSoporteVital,soporteVital,mostrarSoporte,mostrar,vida,piezas,carta3,carta4,saquear,marte4):
         teclaPulsada = pygame.key.get_pressed()
         if(primeraParaiso):
             if(protagonista.rect.x>460 and protagonista.rect.x<540 and protagonista.rect.y>130 and protagonista.rect.y<210):
@@ -254,7 +256,7 @@ class iteracciones:
         Texto.mensajesParaiso(screen,protagonista,primeraParaiso,segundaParaiso,saquear,soporteVital)
         return paraiso,mostrarSoporte,mostrar,soporteVital,vida,piezas,saquear,marte4,primeraParaiso
 
-    def decision(screen,protagonista,cristal,volverNave,jupiter,finJupiter,finEntrarJupiter,decision):
+    def decision(self,screen,protagonista,cristal,volverNave,jupiter,finJupiter,finEntrarJupiter,decision):
         teclaPulsada = pygame.key.get_pressed()
         if(protagonista.rect.x<340):
             teclaPulsada = pygame.key.get_pressed()
@@ -271,7 +273,7 @@ class iteracciones:
 
         return cristal,volverNave,jupiter,finJupiter,finEntrarJupiter
     
-    def construirDistribuidor(screen,protagonista,mostrarCarta,cristal,cristalEnergia,distribuidor,distribuidorEnergia,escena3):
+    def construirDistribuidor(self,screen,protagonista,mostrarCarta,cristal,cristalEnergia,distribuidor,distribuidorEnergia,escena3):
         teclaPulsada = pygame.key.get_pressed()
         if(cristal==True and escena3==False):
             if(mostrarCarta==True):
@@ -293,7 +295,7 @@ class iteracciones:
         Texto.mensajeCristal(screen,protagonista,cristal,distribuidor,escena3)
         return mostrarCarta,cristal,distribuidor
 
-    def mostrarHidrogeno(screen,protagonista,bolaHidrogeno,pintarHidrogeno,cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera):
+    def mostrarHidrogeno(self,screen,protagonista,bolaHidrogeno,pintarHidrogeno,cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera):
         teclaPulsada = pygame.key.get_pressed()
         if(contadorHidrogeno<=0):
             pintarHidrogeno.rect.x = random.randint(100,600)
@@ -315,7 +317,7 @@ class iteracciones:
         Texto.cogerHidrogeno(screen,protagonista,pintarHidrogeno,cogerHidrogeno)
         return cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera
     
-    def iteraccionesUrano(screen,protagonista,urano1,urano2,urano3,urano4,cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1):
+    def iteraccionesUrano(self,screen,protagonista,urano1,urano2,urano3,urano4,cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1):
         teclaPulsada = pygame.key.get_pressed()
         if(urano1):
             if(protagonista.rect.x>120 and protagonista.rect.x<190  and protagonista.rect.y<285):
@@ -345,7 +347,7 @@ class iteracciones:
         Texto.mensajesUrano(screen,protagonista,urano1,urano2,urano3,urano4,cogerPieza,cogerBidon,volverNave,escenaNave1)
         return cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1
 
-    def construirTraje(screen,protagonista,trajeAP,trajeAntipresion,hidrogeno,mostrarCarta,escenaNave3):
+    def construirTraje(self,screen,protagonista,trajeAP,trajeAntipresion,hidrogeno,mostrarCarta,escenaNave3):
         teclaPulsada = pygame.key.get_pressed()
         if(protagonista.rect.x>191 and protagonista.rect.x<499 and protagonista.rect.y>540):
             if(escenaNave3==True and teclaPulsada[pygame.K_e]):
@@ -359,7 +361,7 @@ class iteracciones:
         Texto.mensajeTraje(screen,protagonista,hidrogeno,trajeAP,escenaNave3)
         return mostrarCarta,trajeAP,hidrogeno
     
-    def combate(screen,protagonista,antagonista,vidaJefe,dispararBala,disparo,contadorDisparo,disparoMaligno,balaOscura,pintarBalaOscura,vida,miraEspecial,explosionEspecial,pintarMira,pintarExplosion,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,soporteVital,balas,pintarMedicamentos,crearMedicamento):
+    def combate(self,screen,protagonista,antagonista,vidaJefe,dispararBala,disparo,contadorDisparo,disparoMaligno,balaOscura,pintarBalaOscura,vida,miraEspecial,explosionEspecial,pintarMira,pintarExplosion,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,soporteVital,balas,pintarMedicamentos,crearMedicamento):
         teclaPulsada = pygame.key.get_pressed()
         if(contadorDisparo<=0):
             if(vidaJefe<=101 and vidaJefe>=60):
@@ -511,7 +513,7 @@ class iteracciones:
                 
         return contadorDisparo,disparoMaligno,vidaJefe,disparo,vida,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,balas
 
-    def movimientoJefe(antagonista,derechaJefe,izquierdaJefe,vidaJefe):
+    def movimientoJefe(self,antagonista,derechaJefe,izquierdaJefe,vidaJefe):
         if(vidaJefe<101 and vidaJefe>=60 and derechaJefe==1):
             antagonista.rect.x+=2
         if(vidaJefe<60 and vidaJefe>=30 and derechaJefe==1):
@@ -525,7 +527,7 @@ class iteracciones:
         if(vidaJefe<30 and vidaJefe>0 and izquierdaJefe==1):
             antagonista.rect.x-=4
 
-    def entrarNavePluton(screen,protagonista,pluton1,volverNave,escenaNave1):
+    def entrarNavePluton(self,screen,protagonista,pluton1,volverNave,escenaNave1):
         teclaPulsada = pygame.key.get_pressed()
         if(protagonista.rect.y>635 and protagonista.rect.y<670 and protagonista.rect.x>335 and protagonista.rect.x<415 and pluton1==True and volverNave==False):
             if(teclaPulsada[pygame.K_e]):

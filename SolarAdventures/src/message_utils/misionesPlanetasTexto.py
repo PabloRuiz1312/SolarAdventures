@@ -1,7 +1,8 @@
 import pygame
-class misionesTexto:
-
-    def misionInicial(screen,primeraMision):
+class MisionesTexto:
+    def __init__(self) -> None:
+        pass
+    def misionInicial(self,screen,primeraMision):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(primeraMision==False):
@@ -13,7 +14,7 @@ class misionesTexto:
             transmitir = fraseIteraccion.render(mision,1,blanco)
             screen.blit(transmitir,(865,640))
 
-    def misionLuna(screen,segundaMision,mapa,volverNave):
+    def misionLuna(self,screen,segundaMision,mapa,volverNave):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(segundaMision==False and volverNave==False):
@@ -37,7 +38,7 @@ class misionesTexto:
             transmitir = fraseIteraccion.render(mision,1,blanco)
             screen.blit(transmitir,(885,640))
     
-    def misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escena3):
+    def misionMarte(self,screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escena3):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(terceraMision==False and piezas<4 and volverNave==False):
@@ -85,7 +86,7 @@ class misionesTexto:
             transmitir = fraseIteraccion.render(mision,1,blanco)
             screen.blit(transmitir,(855,640))
         
-    def misionJupiter(screen,protagonista,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3):
+    def misionJupiter(self,screen,protagonista,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(espacio3==False and volverNave==False):
@@ -121,7 +122,7 @@ class misionesTexto:
             transmitir = fraseIteraccion.render(mision,1,blanco)
             screen.blit(transmitir,(855,640))
 
-    def misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3):
+    def misionUrano(self,screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(hidrogeno<5 and volverNave==False and quintaMision==False):

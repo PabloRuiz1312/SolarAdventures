@@ -1,6 +1,8 @@
 import pygame
-class misiones:
-    def misionPrincipal(primeraMision,mapa,luna,estadoInicial,flecha):
+class Misiones:
+    def __init__(self) -> None:
+        pass
+    def misionPrincipal(self,primeraMision,mapa,luna,estadoInicial,flecha):
         teclaPulsada = pygame.key.get_pressed()
         if(mapa==True):
             primeraMision=True
@@ -10,7 +12,8 @@ class misiones:
         else:
             primeraMision=False
         return luna,primeraMision,estadoInicial
-    def misionLuna(segundaMision,cogerPropulsor,mapa,marte,flecha,luna):
+    
+    def misionLuna(self,segundaMision,cogerPropulsor,mapa,marte,flecha,luna):
         teclaPulsada = pygame.key.get_pressed()
         if(cogerPropulsor==True):
             segundaMision=True
@@ -19,7 +22,7 @@ class misiones:
                 luna = False
         return marte,luna,segundaMision
 
-    def construirGenerador(screen,protagonista,volverNave,escena3,generadorAgua,mostrar,generador,piezas):
+    def construirGenerador(self,screen,protagonista,volverNave,escena3,generadorAgua,mostrar,generador,piezas):
         teclaPulsada = pygame.key.get_pressed()
         if(piezas>=4 and volverNave==True and escena3==True): 
             if(protagonista.rect.x>191 and protagonista.rect.x<499 and protagonista.rect.y>540 and escena3==True):
@@ -32,7 +35,8 @@ class misiones:
                 if(mostrar):
                     generador.draw(screen)
         return generadorAgua,mostrar,piezas
-    def misionMarte(terceraMision,generadorAgua,mapa,jupiter,flecha,marte):
+   
+    def misionMarte(self,terceraMision,generadorAgua,mapa,jupiter,flecha,marte):
         teclaPulsada = pygame.key.get_pressed()
         if(generadorAgua):
             terceraMision=True
@@ -41,7 +45,7 @@ class misiones:
                 marte=False
         return jupiter,marte,terceraMision
     
-    def misionJupiter(cuartaMision,flecha,volverNave,cristal,distribuidor,mapa,jupiter,urano):
+    def misionJupiter(self,cuartaMision,flecha,volverNave,cristal,distribuidor,mapa,jupiter,urano):
         teclaPulsada = pygame.key.get_pressed()
         if(cristal==False and distribuidor==False and volverNave==True):
             cuartaMision=True
@@ -55,7 +59,7 @@ class misiones:
                 jupiter=False
         return cuartaMision,jupiter,urano
     
-    def misionUrano(quintaMision,flecha,volverNave,trajeAP,mapa,urano,pluton):
+    def misionUrano(self,quintaMision,flecha,volverNave,trajeAP,mapa,urano,pluton):
         teclaPulsada = pygame.key.get_pressed()
         if(trajeAP==True):
             quintaMision=True

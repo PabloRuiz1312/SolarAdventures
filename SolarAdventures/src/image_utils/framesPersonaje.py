@@ -1,6 +1,10 @@
 import pygame
 class Frames:
-    def obtenerFrame(spriteSheet,x,y,ancho,largo):
+
+    def __init__(self) -> None:
+        pass
+
+    def obtenerFrame(self,spriteSheet,x,y,ancho,largo):
         negro = pygame.Color(0,0,0)
         frame = pygame.Surface([ancho,largo]).convert()
 
@@ -10,64 +14,64 @@ class Frames:
 
         return frame
     #Funcion para cargar los frames de la derecha del protagonista
-    def cargarFramesDerecha(protagonista):
+    def cargarFramesDerecha(self,protagonista):
         protagonista.framesDerecha = []
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,0,170,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,0,170,85,85)
         protagonista.framesDerecha.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,85,170,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,85,170,85,85)
         protagonista.framesDerecha.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,170,170,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,170,170,85,85)
         protagonista.framesDerecha.append(frame)
     #Funcion para cargar los frames de la izquierda del protagonista
-    def cargarFramesIzquierda(protagonista):
+    def cargarFramesIzquierda(self,protagonista):
         protagonista.framesIzquierda = []
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,0,85,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,0,85,85,85)
         
         protagonista.framesIzquierda.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,85,85,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,85,85,85,85)
         
         protagonista.framesIzquierda.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,170,85,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,170,85,85,85)
         
         protagonista.framesIzquierda.append(frame)
     #Funcion para cargar los frames de abajo del protagonista
-    def cargarFramesAbajo(protagonista):
+    def cargarFramesAbajo(self,protagonista):
         protagonista.framesAbajo = []
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,0,0,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,0,0,85,85)
         
         protagonista.framesAbajo.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,85,0,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,85,0,85,85)
         
         protagonista.framesAbajo.append(frame)
         
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,170,0,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,170,0,85,85)
         
         protagonista.framesAbajo.append(frame)
         protagonista.image = protagonista.framesAbajo[0]
 
         protagonista.rect = protagonista.image.get_rect()
     #Funcion para cargar los frames de arriba derecha del protagonista
-    def cargarFramesArriba(protagonista):
+    def cargarFramesArriba(self,protagonista):
         protagonista.framesArriba = []
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,0,255,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,0,255,85,85)
         
         protagonista.framesArriba.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,85,255,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,85,255,85,85)
         
         protagonista.framesArriba.append(frame)
 
-        frame = Frames.obtenerFrame(protagonista.spriteSheet,170,255,85,85)
+        frame = self.obtenerFrame(protagonista.spriteSheet,170,255,85,85)
         
         protagonista.framesArriba.append(frame)
     #Funcion para actualizar los frames escogidos del protagonista
-    def actualizarFrame (protagonista,derecha,izquierda,abajo,arriba):
+    def actualizarFrame (self,protagonista,derecha,izquierda,abajo,arriba):
         if derecha == 1:
             frame = (protagonista.rect.x // 50) % len(protagonista.framesDerecha)
             protagonista.image = protagonista.framesDerecha [frame]       
@@ -81,7 +85,7 @@ class Frames:
             frame = (protagonista.rect.y  // 50) % len(protagonista.framesAbajo)
             protagonista.image = protagonista.framesAbajo [frame]
 
-    def actualizarFrameJefe(protagonista,derecha,izquierda,abajo,arriba):
+    def actualizarFrameJefe(self,protagonista,derecha,izquierda,abajo,arriba):
         if derecha == 1:
             frame = (protagonista.rect.x // 50) % len(protagonista.framesDerecha)
             protagonista.image = protagonista.framesDerecha [frame]       
@@ -92,116 +96,116 @@ class Frames:
             frame = (protagonista.rect.x  // 50) % len(protagonista.framesAbajo)
             protagonista.image = protagonista.framesAbajo [frame]
     #Funcion para cargar los frames de la derecha del astronauta en el planeta
-    def cargarFramesDerechaAChico(astronauta):
+    def cargarFramesDerechaAChico(self,astronauta):
         astronauta.framesDerecha = []
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,0,113,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,0,113,56.6,56.5)
         astronauta.framesDerecha.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,56.6,113,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,56.6,113,56.6,56.5)
         astronauta.framesDerecha.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,113.2,113,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,113.2,113,56.6,56.5)
         astronauta.framesDerecha.append(frame)
     #Funcion para cargar los frames de la izquierda del astronauta en el planeta
-    def cargarFramesIzquierdaAChico (astronauta):
+    def cargarFramesIzquierdaAChico (self,astronauta):
         astronauta.framesIzquierda = []
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,0,56.5,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,0,56.5,56.6,56.5)
         
         astronauta.framesIzquierda.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,56.6,56.5,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,56.6,56.5,56.6,56.5)
         
         astronauta.framesIzquierda.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,113.2,56.5,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,113.2,56.5,56.6,56.5)
         
         astronauta.framesIzquierda.append(frame)
     #Funcion para cargar los frames de abajo del astronauta en el planeta
-    def cargarFramesAbajoAChico(astronauta):
+    def cargarFramesAbajoAChico(self,astronauta):
         astronauta.framesAbajo = []
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,0,0,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,0,0,56.6,56.5)
         
         astronauta.framesAbajo.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,56.6,0,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,56.6,0,56.6,56.5)
         
         astronauta.framesAbajo.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,113.2,0,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,113.2,0,56.6,56.5)
         
         astronauta.framesAbajo.append(frame)
         astronauta.image = astronauta.framesAbajo[0]
 
         astronauta.rect = astronauta.image.get_rect()
     #Funcion para cargar los frames de arriba del astronauta en el planeta
-    def cargarFramesArribaAChico(astronauta):
+    def cargarFramesArribaAChico(self,astronauta):
         astronauta.framesArriba = []
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,0,169.5,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,0,169.5,56.6,56.5)
         
         astronauta.framesArriba.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,56.6,169.5,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,56.6,169.5,56.6,56.5)
         
         astronauta.framesArriba.append(frame)
 
-        frame = Frames.obtenerFrame(astronauta.spriteSheet,113.2,169.5,56.6,56.5)
+        frame = self.obtenerFrame(astronauta.spriteSheet,113.2,169.5,56.6,56.5)
         
         astronauta.framesArriba.append(frame)
     #Funcion para cargar los frames de la derecha de la nave
-    def cargarFramesNaveDerecha(naveMov):
+    def cargarFramesNaveDerecha(self,naveMov):
         naveMov.framesDerecha = []
-        frame = Frames.obtenerFrame(naveMov.spriteSheet,0,103,64,61)
+        frame = self.obtenerFrame(naveMov.spriteSheet,0,103,64,61)
         naveMov.framesDerecha.append(frame)
     #Funcion para cargar los frames de la izquierda de la nave
-    def cargarFramesNaveIzquierda(naveMov):
+    def cargarFramesNaveIzquierda(self,naveMov):
         naveMov.framesIzquierda = []
-        frame = Frames.obtenerFrame(naveMov.spriteSheet,0,175,64,58.5)
+        frame = self.obtenerFrame(naveMov.spriteSheet,0,175,64,58.5)
         naveMov.framesIzquierda.append(frame)
         naveMov.image = naveMov.framesIzquierda[0]
 
         naveMov.rect = naveMov.image.get_rect()
     #Funcion para cargar los frames de arriba de la nave
-    def cargarFramesNaveArriba(naveMov):
+    def cargarFramesNaveArriba(self,naveMov):
         naveMov.framesArriba = []
-        frame = Frames.obtenerFrame(naveMov.spriteSheet,0,0,64,52)
+        frame = self.obtenerFrame(naveMov.spriteSheet,0,0,64,52)
         naveMov.framesArriba.append(frame)
     #Funcion pata cargar los frames de abajo de la nave
-    def cargarFramesNaveAbajo(naveMov):
+    def cargarFramesNaveAbajo(self,naveMov):
         naveMov.framesAbajo = []
-        frame = Frames.obtenerFrame(naveMov.spriteSheet,0,52,64,52)
+        frame = self.obtenerFrame(naveMov.spriteSheet,0,52,64,52)
         naveMov.framesAbajo.append(frame)
-    def cargarFramesJefeDerecha(jefe):
+    def cargarFramesJefeDerecha(self,jefe):
         jefe.framesDerecha = []
-        frame = Frames.obtenerFrame(jefe.spriteSheet,0,284.66,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,0,284.66,133.3,142.33)
         jefe.framesDerecha.append(frame)
 
-        frame = Frames.obtenerFrame(jefe.spriteSheet,133.3,284.66,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,133.3,284.66,133.3,142.33)
         jefe.framesDerecha.append(frame)
 
-        frame = Frames.obtenerFrame(jefe.spriteSheet,266.6,284.66,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,266.6,284.66,133.3,142.33)
         jefe.framesDerecha.append(frame)
 
-    def cargarFramesJefeIzquierda(jefe):
+    def cargarFramesJefeIzquierda(self,jefe):
         jefe.framesIzquierda = []
-        frame = Frames.obtenerFrame(jefe.spriteSheet,0,142.33,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,0,142.33,133.3,142.33)
         jefe.framesIzquierda.append(frame)
 
-        frame = Frames.obtenerFrame(jefe.spriteSheet,133.3,142.33,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,133.3,142.33,133.3,142.33)
         jefe.framesIzquierda.append(frame)
 
-        frame = Frames.obtenerFrame(jefe.spriteSheet,266.6,142.33,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,266.6,142.33,133.3,142.33)
         jefe.framesIzquierda.append(frame)
         
-    def cargarFramesJefeAbajo(jefe):
+    def cargarFramesJefeAbajo(self,jefe):
         jefe.framesAbajo = []
-        frame = Frames.obtenerFrame(jefe.spriteSheet,0,0,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,0,0,133.3,142.33)
         jefe.framesAbajo.append(frame)
 
-        frame = Frames.obtenerFrame(jefe.spriteSheet,133.3,0,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,133.3,0,133.3,142.33)
         jefe.framesAbajo.append(frame)
 
-        frame = Frames.obtenerFrame(jefe.spriteSheet,266.6,0,133.3,142.33)
+        frame = self.obtenerFrame(jefe.spriteSheet,266.6,0,133.3,142.33)
         jefe.framesAbajo.append(frame)
 
         jefe.image = jefe.framesAbajo[0]

@@ -1,7 +1,8 @@
 import pygame
-class cambioEscena:
-
-    def cambioEcenaNave(protagonista,escena1,escena2,escena3):
+class CambioEscena:
+    def __init__(self) -> None:
+        pass
+    def cambioEcenaNave(self,protagonista,escena1,escena2,escena3):
         if(protagonista.rect.x<10 and (protagonista.rect.y>150 and protagonista.rect.y<300) and escena2==False):
             escena1 = False
             escena2 = True
@@ -29,7 +30,7 @@ class cambioEscena:
 
         return escena1,escena2,escena3
     
-    def cambioEscenaLuna(protagonista,luna1,luna2,luna3,luna4,luna5,luna6):
+    def cambioEscenaLuna(self,protagonista,luna1,luna2,luna3,luna4,luna5,luna6):
         if(protagonista.rect.x<0 and luna1==True):
             luna1=False
             luna2 = True
@@ -81,7 +82,7 @@ class cambioEscena:
 
         return luna1,luna2,luna3,luna4,luna5,luna6 
     
-    def cambioEscenaMarte(protagonista,marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,paraiso,primeraParaiso,segundaParaiso):
+    def cambioEscenaMarte(self,protagonista,marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,paraiso,primeraParaiso,segundaParaiso):
         if(paraiso==True):
             marte4=False
         if(protagonista.rect.x>760 and marte1==True):
@@ -216,7 +217,7 @@ class cambioEscena:
 
         return marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,primeraParaiso,segundaParaiso
     
-    def cambioEscenaJupiter(protagonista,espacio1,espacio2,espacio3):
+    def cambioEscenaJupiter(self,protagonista,espacio1,espacio2,espacio3):
         if(protagonista.rect.x<20 and espacio1==True):
             espacio2=True
             espacio1=False
@@ -235,7 +236,7 @@ class cambioEscena:
             protagonista.rect.x=30
         return espacio1,espacio2,espacio3
     
-    def cambioEscenaUrano(protagonista,urano1,urano2,urano3,urano4):
+    def cambioEscenaUrano(self,protagonista,urano1,urano2,urano3,urano4):
         #Cambios escena central
         if(protagonista.rect.x>760 and urano1==True):
             urano2=True
@@ -266,7 +267,7 @@ class cambioEscena:
             protagonista.rect.y = 750
         return urano1,urano2,urano3,urano4
     
-    def cambioEscenaPluton(protagonista,pluton1,pluton2):
+    def cambioEscenaPluton(self,protagonista,pluton1,pluton2):
         if(protagonista.rect.y<-10 and pluton1==True):
             pluton2 = True
             pluton1 = False

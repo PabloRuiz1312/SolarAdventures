@@ -1,16 +1,29 @@
 import pygame
 import random
 import asyncio
-from framesPersonaje import Frames
-from mensajesJuego import Texto
-from imagenes import cargarImagen
-from mensajesFolletos import cargarMensajes
-from cambiosDeEscena import cambioEscena
-from interaccionesJuego import iteracciones
-from colisionesJuego import Colisiones
-from misionesPlanetas import misiones
-from misionesPlanetasTexto import misionesTexto
-from finJuego import gameOvers
+#IMPORTACION DE MODULOS
+import image_utils.framesPersonaje as fr 
+import image_utils.imagenes as img
+import message_utils.mensajesJuego as msgGame
+import message_utils.mensajesFolletos as loadMsg
+import map.cambiosDeEscena as changeScreen
+import logic.interaccionesJuego as iteract
+import map.colisionesJuego as colisions
+import logic.misionesPlanetas as missions
+import message_utils.misionesPlanetasTexto as missionsTxt
+import logic.finJuego as end
+#IMPORTACION DE CLASES
+Frames = fr.Frames()
+CargarImagen = img.CargarImagen()
+Texto = msgGame.Texto()
+CargarMensajes = loadMsg.CargarMensajes()
+CambioEscena = changeScreen.CambioEscena()
+Iteracciones = iteract.Iteracciones()
+Colisiones = colisions.Colisiones()
+Misiones = missions.Misiones()
+MisionesTexto = missionsTxt.MisionesTexto()
+GameOvers = end.GameOvers()
+
 async def main():
     #Ancho y largo de la ventana
     ANCHO = 1200
@@ -147,19 +160,19 @@ async def main():
     contadorNivel=0
     #------------------Astronauta y movimiento --------------#
     astronauta = pygame.sprite.Group()
-    protagonista = cargarImagen.crearAstronauta(astronauta)
+    protagonista = CargarImagen.crearAstronauta(astronauta)
     astronautaEnPlaneta = pygame.sprite.Group()
-    protagonistaEnPlaneta = cargarImagen.crearAstronautaPlaneta(astronautaEnPlaneta)
+    protagonistaEnPlaneta = CargarImagen.crearAstrdonautaPlaneta(astronautaEnPlaneta)
     derecha = 0 
     izquierda = 0 
     arriba = 0 
     abajo = 0 
     bala = pygame.sprite.Group()
-    pintarBala = cargarImagen.crearBalas(bala)
+    pintarBala = CargarImagen.crearBalas(bala)
     recargar = True
     #------------------Nave y movimiento-----------------#
     nave = pygame.sprite.Group()
-    pintarNave = cargarImagen.crearNave(nave)
+    pintarNave = CargarImagen.crearNave(nave)
     #------------------Estadisticas----------------------#
     vida = 100
     balas = 0
@@ -171,70 +184,70 @@ async def main():
     estadisticas = pygame.sprite.Group()
     #------------------Informacion planetas--------------#
     infoSol = pygame.sprite.Group()
-    pintarSol = cargarImagen.infoSol(infoSol)
+    pintarSol = CargarImagen.infoSol(infoSol)
     infoMercurio = pygame.sprite.Group()
-    pintarMercurio = cargarImagen.infoMercurio(infoMercurio)
+    pintarMercurio = CargarImagen.infoMercurio(infoMercurio)
     infoVenus = pygame.sprite.Group()
-    pintarVenus = cargarImagen.infoVenus(infoVenus)
+    pintarVenus = CargarImagen.infoVenus(infoVenus)
     infoTierra = pygame.sprite.Group()
-    pintarTierra = cargarImagen.infoTierra(infoTierra)
+    pintarTierra = CargarImagen.infoTierra(infoTierra)
     infoMarte = pygame.sprite.Group()
-    pintarMarte = cargarImagen.infoMarte(infoMarte)
+    pintarMarte = CargarImagen.infoMarte(infoMarte)
     infoJupiter = pygame.sprite.Group()
-    pintarJupiter = cargarImagen.infoJupiter(infoJupiter)
+    pintarJupiter = CargarImagen.infoJupiter(infoJupiter)
     infoSaturno = pygame.sprite.Group()
-    pintarSaturno = cargarImagen.infoSaturno(infoSaturno)
+    pintarSaturno = CargarImagen.infoSaturno(infoSaturno)
     infoUrano = pygame.sprite.Group()
-    pintarUrano = cargarImagen.infoUrano(infoUrano)
+    pintarUrano = CargarImagen.infoUrano(infoUrano)
     infoNeptuno = pygame.sprite.Group()
-    pintarNeptuno = cargarImagen.infoNeptuno(infoNeptuno)
+    pintarNeptuno = CargarImagen.infoNeptuno(infoNeptuno)
     infoPluton = pygame.sprite.Group()
-    pintarPluton = cargarImagen.infoPluton(infoPluton)
+    pintarPluton = CargarImagen.infoPluton(infoPluton)
     
     #------------------Escena nave-----------------------#
     escenaComienzo = pygame.sprite.Group()
-    pintarComienzo = cargarImagen.crearComienzo(escenaComienzo)
+    pintarComienzo = CargarImagen.crearComienzo(escenaComienzo)
     escenaControles = pygame.sprite.Group()
-    pintarControles = cargarImagen.crearControles(escenaControles)
+    pintarControles = CargarImagen.crearControles(escenaControles)
     salirControles = False
     salirComienzo = False
     escenaNaveCentral = pygame.sprite.Group()
-    pintarNave1 = cargarImagen.escenaNave1(escenaNaveCentral)
+    pintarNave1 = CargarImagen.escenaNave1(escenaNaveCentral)
     escenaNaveIzquierda = pygame.sprite.Group()
-    pintarNave2 = cargarImagen.escenaNave2(escenaNaveIzquierda)
+    pintarNave2 = CargarImagen.escenaNave2(escenaNaveIzquierda)
     escenaNaveAbajo = pygame.sprite.Group()
-    pintarNave3 = cargarImagen.escenaNave3(escenaNaveAbajo)
+    pintarNave3 = CargarImagen.escenaNave3(escenaNaveAbajo)
     mapaEspacio = pygame.sprite.Group()
-    pintarMapa = cargarImagen.crearMapa(mapaEspacio)
+    pintarMapa = CargarImagen.crearMapa(mapaEspacio)
     flechaMapa = pygame.sprite.Group()
-    pintarFlecha = cargarImagen.crearFlecha(flechaMapa)
+    pintarFlecha = CargarImagen.crearFlecha(flechaMapa)
     escenaNave1 = True
     escenaNave2 = False
     escenaNave3 = False
     #------------------Escena luna-----------------------#
     salirNivelLuna = False
     nivelLuna = pygame.sprite.Group()
-    pintarNivelLuna = cargarImagen.nivelLuna(nivelLuna)
+    pintarNivelLuna = CargarImagen.nivelLuna(nivelLuna)
     escenaLuna1 = pygame.sprite.Group()
-    pintarLuna1 = cargarImagen.escenaLuna1(escenaLuna1)
+    pintarLuna1 = CargarImagen.escenaLuna1(escenaLuna1)
     escenaLuna2 = pygame.sprite.Group()
-    pintarLuna2 = cargarImagen.escenaLuna2(escenaLuna2)
+    pintarLuna2 = CargarImagen.escenaLuna2(escenaLuna2)
     escenaLuna3 = pygame.sprite.Group()
-    pintarLuna3 = cargarImagen.escenaLuna3(escenaLuna3)
+    pintarLuna3 = CargarImagen.escenaLuna3(escenaLuna3)
     escenaLuna4 = pygame.sprite.Group()
-    pintarLuna4 = cargarImagen.escenaLuna4(escenaLuna4)
+    pintarLuna4 = CargarImagen.escenaLuna4(escenaLuna4)
     escenaLuna5 = pygame.sprite.Group()
-    pintarLuna5 = cargarImagen.escenaLuna5(escenaLuna5)
+    pintarLuna5 = CargarImagen.escenaLuna5(escenaLuna5)
     escenaLuna6 = pygame.sprite.Group()
-    pintarLuna6 = cargarImagen.escenaLuna6(escenaLuna6)
+    pintarLuna6 = CargarImagen.escenaLuna6(escenaLuna6)
     propulsor = pygame.sprite.Group()
-    pintarPropulsor = cargarImagen.propulsorLuz(propulsor)
+    pintarPropulsor = CargarImagen.propulsorLuz(propulsor)
     bidon = pygame.sprite.Group()
-    pintarBidon = cargarImagen.crearBidonGasofa(bidon)
+    pintarBidon = CargarImagen.crearBidonGasofa(bidon)
     pieza = pygame.sprite.Group()
-    pintarPieza = cargarImagen.crearPiezas(pieza)
+    pintarPieza = CargarImagen.crearPiezas(pieza)
     inyector = pygame.sprite.Group()
-    pintarInyector = cargarImagen.crearInyector(inyector)
+    pintarInyector = CargarImagen.crearInyector(inyector)
     luna1 = True
     luna2 = False
     luna3 = False
@@ -250,45 +263,45 @@ async def main():
     #------------Escena marte---------------------------#
     salirNivelMarte = False
     nivelMarte = pygame.sprite.Group()
-    pintarNivelMarte = cargarImagen.nivelMarte(nivelMarte)
+    pintarNivelMarte = CargarImagen.nivelMarte(nivelMarte)
     escena1_1 = pygame.sprite.Group()
-    pintarEscena1_1 = cargarImagen.escenaMarte1(escena1_1)
+    pintarEscena1_1 = CargarImagen.escenaMarte1(escena1_1)
     escena1_2 = pygame.sprite.Group()
-    pintarEscena1_2 = cargarImagen.escenaMarte2(escena1_2)
+    pintarEscena1_2 = CargarImagen.escenaMarte2(escena1_2)
     escena1_3 = pygame.sprite.Group()
-    pintarEscena1_3 = cargarImagen.escenaMarte3(escena1_3)
+    pintarEscena1_3 = CargarImagen.escenaMarte3(escena1_3)
     escena1_4 = pygame.sprite.Group()
-    pintarEscena1_4 = cargarImagen.escenaMarte4(escena1_4)
+    pintarEscena1_4 = CargarImagen.escenaMarte4(escena1_4)
     escena2_1 = pygame.sprite.Group()
-    pintarEscena2_1 = cargarImagen.escenaMarte5(escena2_1)
+    pintarEscena2_1 = CargarImagen.escenaMarte5(escena2_1)
     escena2_2 = pygame.sprite.Group()
-    pintarEscena2_2 = cargarImagen.escenaMarte6(escena2_2)
+    pintarEscena2_2 = CargarImagen.escenaMarte6(escena2_2)
     escena2_3 = pygame.sprite.Group()
-    pintarEscena2_3 = cargarImagen.escenaMarte7(escena2_3)
+    pintarEscena2_3 = CargarImagen.escenaMarte7(escena2_3)
     escena2_4 = pygame.sprite.Group()
-    pintarEscena2_4 = cargarImagen.escenaMarte8(escena2_4)
+    pintarEscena2_4 = CargarImagen.escenaMarte8(escena2_4)
     escena3_1 = pygame.sprite.Group()
-    pintarEscena3_1 = cargarImagen.escenaMarte9(escena3_1)
+    pintarEscena3_1 = CargarImagen.escenaMarte9(escena3_1)
     escena3_2 = pygame.sprite.Group()
-    pintarEscena3_2 = cargarImagen.escenaMarte10(escena3_2)
+    pintarEscena3_2 = CargarImagen.escenaMarte10(escena3_2)
     escena3_3 = pygame.sprite.Group()
-    pintarEscena3_3 = cargarImagen.escenaMarte11(escena3_3)
+    pintarEscena3_3 = CargarImagen.escenaMarte11(escena3_3)
     cartaParaiso1 = pygame.sprite.Group()
-    carta1 = cargarImagen.CrearCartaSecretaMarte(cartaParaiso1)
+    carta1 = CargarImagen.CrearCartaSecretaMarte(cartaParaiso1)
     cartaParaiso2 = pygame.sprite.Group()
-    carta2 = cargarImagen.CrearCartaSecretaMarte2(cartaParaiso2)
+    carta2 = CargarImagen.CrearCartaSecretaMarte2(cartaParaiso2)
     cartaParaiso3 = pygame.sprite.Group()
-    carta3 = cargarImagen.crearPrimerMensajeParaiso(cartaParaiso3)
+    carta3 = CargarImagen.crearPrimerMensajeParaiso(cartaParaiso3)
     cartaParaiso4 = pygame.sprite.Group()
-    carta4 = cargarImagen.crearSegundoMensajeParaiso(cartaParaiso4)
+    carta4 = CargarImagen.crearSegundoMensajeParaiso(cartaParaiso4)
     escenaParaiso1 = pygame.sprite.Group()
-    pintarEsPar1 = cargarImagen.CrearPrimeraEscenaParaiso(escenaParaiso1)
+    pintarEsPar1 = CargarImagen.CrearPrimeraEscenaParaiso(escenaParaiso1)
     escenaParaiso2 = pygame.sprite.Group()
-    pintarEsPar2 = cargarImagen.CrearElParaiso(escenaParaiso2)
+    pintarEsPar2 = CargarImagen.CrearElParaiso(escenaParaiso2)
     mensajeSoporteVital = pygame.sprite.Group()
-    pintarSoporteVital = cargarImagen.crearSoporteVital(mensajeSoporteVital)
+    pintarSoporteVital = CargarImagen.crearSoporteVital(mensajeSoporteVital)
     generador = pygame.sprite.Group()
-    pintarGenerador = cargarImagen.crearGeneradorAgua(generador)
+    pintarGenerador = CargarImagen.crearGeneradorAgua(generador)
     marte1 = False
     marte2 = False
     marte3 = False
@@ -316,29 +329,29 @@ async def main():
     #-----------Escena jupiter--------------------------#
     salirNivelJupiter = False
     naveMovimiento = pygame.sprite.Group()
-    naveMov = cargarImagen.crearNaveEnMovimiento(naveMovimiento)
+    naveMov = CargarImagen.crearNaveEnMovimiento(naveMovimiento)
     nivelJupiter = pygame.sprite.Group()
-    pintarNivelJupiter = cargarImagen.nivelJupiter(nivelJupiter)
+    pintarNivelJupiter = CargarImagen.nivelJupiter(nivelJupiter)
     escenaEspacio1 = pygame.sprite.Group()
-    pintarEspacio1 = cargarImagen.crearEscenaEspacio(escenaEspacio1)
+    pintarEspacio1 = CargarImagen.crearEscenaEspacio(escenaEspacio1)
     escenaEspacio2 = pygame.sprite.Group()
-    pintarEspacio2 = cargarImagen.crearEscenaEspacio2(escenaEspacio2)
+    pintarEspacio2 = CargarImagen.crearEscenaEspacio2(escenaEspacio2)
     escenaEspacio3 = pygame.sprite.Group()
-    pintarEspacio3 = cargarImagen.crearEscenaEspacioJupiter(escenaEspacio3)
+    pintarEspacio3 = CargarImagen.crearEscenaEspacioJupiter(escenaEspacio3)
     decision = pygame.sprite.Group()
-    pintarDecision = cargarImagen.crearDecisionJupiter(decision)
+    pintarDecision = CargarImagen.crearDecisionJupiter(decision)
     cristalEnergia = pygame.sprite.Group()
-    pintarCristal = cargarImagen.crearCristal(cristalEnergia)
+    pintarCristal = CargarImagen.crearCristal(cristalEnergia)
     distribuidorEnergia = pygame.sprite.Group()
-    pintarDistribuidor = cargarImagen.crearDistribuidor(distribuidorEnergia)
+    pintarDistribuidor = CargarImagen.crearDistribuidor(distribuidorEnergia)
     meteoritoPequeño = pygame.sprite.Group()
-    meteorito1 = cargarImagen.crearMeteoritoSimple(meteoritoPequeño)
+    meteorito1 = CargarImagen.crearMeteoritoSimple(meteoritoPequeño)
     meteoritoAlargado = pygame.sprite.Group()
-    meteorito2 = cargarImagen.crearMeteoritoAlargado(meteoritoAlargado)
+    meteorito2 = CargarImagen.crearMeteoritoAlargado(meteoritoAlargado)
     meteoritoAncho = pygame.sprite.Group()
-    meteorito3 = cargarImagen.crearMeteoritoAncho(meteoritoAncho)
+    meteorito3 = CargarImagen.crearMeteoritoAncho(meteoritoAncho)
     meteoritoGrande = pygame.sprite.Group()
-    meteorito4 = cargarImagen.crearMeteoritoGrande(meteoritoGrande)
+    meteorito4 = CargarImagen.crearMeteoritoGrande(meteoritoGrande)
     espacio1 = False
     espacio2 = False
     espacio3 = False
@@ -348,19 +361,19 @@ async def main():
     #------------Escena Urano---------------------------#
     salirNivelUrano = False
     nivelUrano = pygame.sprite.Group()
-    pintarNivelUrano = cargarImagen.nivelUrano(nivelUrano)
+    pintarNivelUrano = CargarImagen.nivelUrano(nivelUrano)
     escenaUrano1 = pygame.sprite.Group()
-    pintarUrano1 = cargarImagen.crearEscenaCentralUrano(escenaUrano1)
+    pintarUrano1 = CargarImagen.crearEscenaCentralUrano(escenaUrano1)
     escenaUrano2 = pygame.sprite.Group()
-    pintarUrano2 = cargarImagen.crearEscenaUranoCruce(escenaUrano2)
+    pintarUrano2 = CargarImagen.crearEscenaUranoCruce(escenaUrano2)
     escenaUrano3 = pygame.sprite.Group()
-    pintarUrano3 = cargarImagen.crearEscenaUranoArriba(escenaUrano3)
+    pintarUrano3 = CargarImagen.crearEscenaUranoArriba(escenaUrano3)
     escenaUrano4 = pygame.sprite.Group()
-    pintarUrano4 = cargarImagen.crearEscenaUranoAbajo(escenaUrano4)
+    pintarUrano4 = CargarImagen.crearEscenaUranoAbajo(escenaUrano4)
     bolaHidrogeno = pygame.sprite.Group()
-    pintarHidrogeno = cargarImagen.crearBolaHidrogeno(bolaHidrogeno)
+    pintarHidrogeno = CargarImagen.crearBolaHidrogeno(bolaHidrogeno)
     trajeAntiPresion = pygame.sprite.Group()
-    pintarTraje = cargarImagen.crearTrajeAntiPresion(trajeAntiPresion)
+    pintarTraje = CargarImagen.crearTrajeAntiPresion(trajeAntiPresion)
     trajeAP = False
     hidrogeno = 0
     urano1 = False
@@ -373,23 +386,23 @@ async def main():
     #------------Escena Pluton--------------------------#
     salirNivelPluton = False
     nivelPluton = pygame.sprite.Group()
-    pintarNivelPluton = cargarImagen.nivelPluton(nivelPluton)
+    pintarNivelPluton = CargarImagen.nivelPluton(nivelPluton)
     escenaPluton1 = pygame.sprite.Group()
-    pintarPluton1 = cargarImagen.crearEscenaCentralPluton(escenaPluton1)
+    pintarPluton1 = CargarImagen.crearEscenaCentralPluton(escenaPluton1)
     escenaPluton2 = pygame.sprite.Group()
-    pintarPluton2 = cargarImagen.crearEscenaJefePluton(escenaPluton2)
+    pintarPluton2 = CargarImagen.crearEscenaJefePluton(escenaPluton2)
     jefe = pygame.sprite.Group()
-    antagonista = cargarImagen.crearJefeFinal(jefe)
+    antagonista = CargarImagen.crearJefeFinal(jefe)
     balaOscura = pygame.sprite.Group()
-    pintarBalaOscura = cargarImagen.crearBalaMaligna(balaOscura) 
+    pintarBalaOscura = CargarImagen.crearBalaMaligna(balaOscura) 
     crearExplosion = pygame.sprite.Group()
-    pintarExplosion = cargarImagen.crearExplosion(crearExplosion)
+    pintarExplosion = CargarImagen.crearExplosion(crearExplosion)
     crearMira = pygame.sprite.Group()
-    pintarMira = cargarImagen.crearMira(crearMira)
+    pintarMira = CargarImagen.crearMira(crearMira)
     crearMedicamento = pygame.sprite.Group()
-    pintarMedicamento = cargarImagen.crearMedicamento(crearMedicamento)  
+    pintarMedicamento = CargarImagen.crearMedicamento(crearMedicamento)  
     ganacion = pygame.sprite.Group()
-    pintarGanacion = cargarImagen.ganacion(ganacion)
+    pintarGanacion = CargarImagen.ganacion(ganacion)
     pluton1 = True
     pluton2 = False
     vidaJefe = 100
@@ -418,15 +431,15 @@ async def main():
     quintaMision = False
     #----------Game overs-------------------------------#
     gameOverVida = pygame.sprite.Group()
-    pintarFinVida = cargarImagen.gameOverVida(gameOverVida)
+    pintarFinVida = CargarImagen.gameOverVida(gameOverVida)
     gameOverJupiter = pygame.sprite.Group()
-    pintarFinJupiter = cargarImagen.crearGameOverEntrarJupiter(gameOverJupiter)
+    pintarFinJupiter = CargarImagen.crearGameOverEntrarJupiter(gameOverJupiter)
     gameOverArreglos = pygame.sprite.Group()
-    pintarFinArreglos = cargarImagen.crearGameOverMeteoritos(gameOverArreglos)
+    pintarFinArreglos = CargarImagen.crearGameOverMeteoritos(gameOverArreglos)
     gameOverGasolina = pygame.sprite.Group()
-    pintarFinGasolina = cargarImagen.crearGameOverGasolina(gameOverGasolina)
+    pintarFinGasolina = CargarImagen.crearGameOverGasolina(gameOverGasolina)
     gameOverJefe = pygame.sprite.Group()
-    pintarFinJefe = cargarImagen.crearGameOverJefeFinal(gameOverJefe)
+    pintarFinJefe = CargarImagen.crearGameOverJefeFinal(gameOverJefe)
     finVida = False
     finGasolina = False
     finArreglos = False
@@ -447,12 +460,12 @@ async def main():
         if(finVida==True):
             gameOverVida.draw(screen)
             if(finMarte==True and resetear==False):
-                salirNivelMarte,marte,contadorNivel,resetear,vida,funcionando=gameOvers.empezarPorVida(salirNivelMarte,marte,contadorNivel,resetear,vida,funcionando)
+                salirNivelMarte,marte,contadorNivel,resetear,vida,funcionando=GameOvers.empezarPorVida(salirNivelMarte,marte,contadorNivel,resetear,vida,funcionando)
             if(finUrano==True and resetear==False):
-                salirNivelUrano,urano,contadorNivel,resetear,vida,funcionando=gameOvers.empezarPorVida(salirNivelUrano,urano,contadorNivel,resetear,vida,funcionando)
+                salirNivelUrano,urano,contadorNivel,resetear,vida,funcionando=GameOvers.empezarPorVida(salirNivelUrano,urano,contadorNivel,resetear,vida,funcionando)
         if(finVida==True and finPluton==True):
             gameOverJefe.draw(screen)
-            salirNivelPluton,pluton,contadorNivel,resetear,vida,funcionando=gameOvers.empezarPorVida(salirNivelPluton,pluton,contadorNivel,resetear,vida,funcionando)
+            salirNivelPluton,pluton,contadorNivel,resetear,vida,funcionando=GameOvers.empezarPorVida(salirNivelPluton,pluton,contadorNivel,resetear,vida,funcionando)
             contadorExplosion = 0
             contadorMira = 0
             vidaJefe = 100
@@ -461,33 +474,33 @@ async def main():
             gameOverGasolina.draw(screen)
             if(finJupiter==True and resetear==False):
                 if(contadorFinJuego==200):
-                    salirNivelMarte,marte,contadorNivel,resetear,funcionando=gameOvers.empezarPorGasolina(salirNivelMarte,marte,contadorNivel,resetear,funcionando)
+                    salirNivelMarte,marte,contadorNivel,resetear,funcionando=GameOvers.empezarPorGasolina(salirNivelMarte,marte,contadorNivel,resetear,funcionando)
                 if(contadorFinJuego!=200):
                     contadorFinJuego+=1 
             if(finUrano==True and resetear==False):
                 if(contadorFinJuego==200):
-                    salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando=gameOvers.empezarPorGasolina(salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando)
+                    salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando=GameOvers.empezarPorGasolina(salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando)
                 if(contadorFinJuego!=200):
                     contadorFinJuego+=1
             if(finPluton==True and resetear==False):
                 if(contadorFinJuego==200):
-                    salirNivelUrano,urano,contadorNivel,resetear,funcionando=gameOvers.empezarPorGasolina(salirNivelUrano,urano,contadorNivel,resetear,funcionando)
+                    salirNivelUrano,urano,contadorNivel,resetear,funcionando=GameOvers.empezarPorGasolina(salirNivelUrano,urano,contadorNivel,resetear,funcionando)
                 if(contadorFinJuego!=200):
                     contadorFinJuego+=1
         if(finArreglos==True):
             gameOverArreglos.draw(screen)
             if(finJupiter==True and resetear==False):
-                salirNivelJupiter,jupiter,contadorNivel,resetear,arreglo,funcionando = gameOvers.empezarPorArreglos(salirNivelJupiter,jupiter,contadorNivel,resetear,arreglo,funcionando)
+                salirNivelJupiter,jupiter,contadorNivel,resetear,arreglo,funcionando = GameOvers.empezarPorArreglos(salirNivelJupiter,jupiter,contadorNivel,resetear,arreglo,funcionando)
         if(finEntrarJupiter==True):
             gameOverJupiter.draw(screen)
             if(finJupiter==True and resetear==False):
-                salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando = gameOvers.empezarPorJupiter(salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando)
+                salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando = GameOvers.empezarPorJupiter(salirNivelJupiter,jupiter,contadorNivel,resetear,funcionando)
         if(salirComienzo==False):
             escenaComienzo.draw(screen)
-            salirComienzo = cargarMensajes.comienzo(salirComienzo)
+            salirComienzo = CargarMensajes.comienzo(salirComienzo)
         elif(salirControles==False and salirComienzo==True):
             escenaControles.draw(screen)
-            salirControles,contadorNivel = cargarMensajes.controles(salirControles,contadorNivel)
+            salirControles,contadorNivel = CargarMensajes.controles(salirControles,contadorNivel)
         elif(faseInicial==True and luna == False and marte==False and jupiter==False and urano==False and pluton==False):
             if(mapa==False):
                 if(escenaNave1):
@@ -496,28 +509,28 @@ async def main():
                     escenaNaveIzquierda.draw(screen)
                 if(escenaNave3):
                     escenaNaveAbajo.draw(screen)
-                balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
+                balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = Iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
                 astronauta.draw(screen)
                 derecha,izquierda,arriba,abajo = gestionarEventos(protagonista,derecha,izquierda,arriba,abajo,trajeAP)
                 balas,recargar = disparar(screen,protagonista,pintarBala,bala,balas,recargar)
                 Colisiones.colisionNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                escenaNave1,escenaNave2,escenaNave3 = cambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                misionesTexto.misionInicial(screen,primeraMision)
+                escenaNave1,escenaNave2,escenaNave3 = CambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
+                MisionesTexto.misionInicial(screen,primeraMision)
             if(mapa==True):
                 mapaEspacio.draw(screen)
                 flechaMapa.draw(screen)
                 mapa=gestionarEventosMapa(pintarFlecha,mapa)
                 Colisiones.colisionesMapa(pintarFlecha)
                 Texto.mensajesMapa(screen,pintarFlecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision)
-                iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
-                luna,primeraMision,faseInicial = misiones.misionPrincipal(primeraMision,mapa,luna,faseInicial,pintarFlecha)
-                misionesTexto.misionInicial(screen,primeraMision)
+                Iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
+                luna,primeraMision,faseInicial = Misiones.misionPrincipal(primeraMision,mapa,luna,faseInicial,pintarFlecha)
+                MisionesTexto.misionInicial(screen,primeraMision)
                 if(faseInicial==False):
                     gasolina-=15
                     contadorNivel=0
                     salirNivelLuna = False
             estadisticas.draw(screen)
-            estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+            estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
             Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
             Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
         elif(faseInicial==False and luna == True and marte==False and jupiter==False and urano==False and pluton==False):
@@ -526,7 +539,7 @@ async def main():
                 mapa = False
                 escenaNave2=False
                 escenaNave1 = True
-                salirNivelLuna,contadorNivel = cargarMensajes.nivelLuna(salirNivelLuna,contadorNivel)
+                salirNivelLuna,contadorNivel = CargarMensajes.nivelLuna(salirNivelLuna,contadorNivel)
                 pintarNave.rect.x = 450
                 pintarNave.rect.y = 200
                 protagonistaEnPlaneta.rect.x = 570
@@ -556,15 +569,15 @@ async def main():
                 astronautaEnPlaneta.draw(screen)
                 derecha,izquierda,arriba,abajo = gestionarEventos(protagonistaEnPlaneta,derecha,izquierda,arriba,abajo,trajeAP)
                 balas,recargar = disparar(screen,protagonistaEnPlaneta,pintarBala,bala,balas,recargar)
-                volverNave,cogerPieza,piezas,cogerBidon,bidones,cogerPropulsor,secretoLuna,mostrarInyector = iteracciones.iteraccionesLuna(screen,protagonistaEnPlaneta,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escenaNave1,cogerBidon,cogerPieza,cogerPropulsor,bidones,piezas,secretoLuna,mostrarInyector,inyector)
+                volverNave,cogerPieza,piezas,cogerBidon,bidones,cogerPropulsor,secretoLuna,mostrarInyector = Iteracciones.iteraccionesLuna(screen,protagonistaEnPlaneta,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escenaNave1,cogerBidon,cogerPieza,cogerPropulsor,bidones,piezas,secretoLuna,mostrarInyector,inyector)
                 Colisiones.colisionesLuna(protagonistaEnPlaneta,pintarNave,luna1,luna2,luna3,luna4,luna5,luna6)
-                luna1,luna2,luna3,luna4,luna5,luna6 = cambioEscena.cambioEscenaLuna(protagonistaEnPlaneta,luna1,luna2,luna3,luna4,luna5,luna6)
+                luna1,luna2,luna3,luna4,luna5,luna6 = CambioEscena.cambioEscenaLuna(protagonistaEnPlaneta,luna1,luna2,luna3,luna4,luna5,luna6)
                 estadisticas.draw(screen)
-                estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                 Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                 Frames.actualizarFrame(protagonistaEnPlaneta,derecha,izquierda,abajo,arriba)
-                marte,luna,segundaMision = misiones.misionLuna(segundaMision,cogerPropulsor,mapa,marte,pintarFlecha,luna)
-                misionesTexto.misionLuna(screen,segundaMision,mapa,volverNave)
+                marte,luna,segundaMision = Misiones.misionLuna(segundaMision,cogerPropulsor,mapa,marte,pintarFlecha,luna)
+                MisionesTexto.misionLuna(screen,segundaMision,mapa,volverNave)
                 if(volverNave==True):
                     protagonista.rect.y  = 150
             else:
@@ -575,19 +588,19 @@ async def main():
                         escenaNaveIzquierda.draw(screen)
                     if(escenaNave3):
                         escenaNaveAbajo.draw(screen)
-                    balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
+                    balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = Iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
                     astronauta.draw(screen)
                     derecha,izquierda,arriba,abajo = gestionarEventos(protagonista,derecha,izquierda,arriba,abajo,trajeAP)
                     balas,recargar = disparar(screen,protagonista,pintarBala,bala,balas,recargar)
                     Colisiones.colisionNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                    escenaNave1,escenaNave2,escenaNave3 = cambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                    volverNave,cogerPieza,piezas,cogerBidon,bidones,cogerPropulsor,secretoLuna,mostrarInyector = iteracciones.iteraccionesLuna(screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escenaNave1,cogerBidon,cogerPieza,cogerPropulsor,bidones,piezas,secretoLuna,mostrarInyector,inyector)
+                    escenaNave1,escenaNave2,escenaNave3 = CambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
+                    volverNave,cogerPieza,piezas,cogerBidon,bidones,cogerPropulsor,secretoLuna,mostrarInyector = Iteracciones.iteraccionesLuna(screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escenaNave1,cogerBidon,cogerPieza,cogerPropulsor,bidones,piezas,secretoLuna,mostrarInyector,inyector)
                     estadisticas.draw(screen)
-                    estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                    estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                     Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                     Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
-                    marte,luna,segundaMision = misiones.misionLuna(segundaMision,cogerPropulsor,mapa,marte,pintarFlecha,luna)
-                    misionesTexto.misionLuna(screen,segundaMision,mapa,volverNave)
+                    marte,luna,segundaMision = Misiones.misionLuna(segundaMision,cogerPropulsor,mapa,marte,pintarFlecha,luna)
+                    MisionesTexto.misionLuna(screen,segundaMision,mapa,volverNave)
                     if(volverNave==False):
                         protagonistaEnPlaneta.rect.y = 490
                 else:
@@ -596,13 +609,13 @@ async def main():
                     mapa=gestionarEventosMapa(pintarFlecha,mapa)
                     Colisiones.colisionesMapa(pintarFlecha)
                     Texto.mensajesMapa(screen,pintarFlecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision)
-                    iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
+                    Iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
                     estadisticas.draw(screen)
-                    estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                    estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                     Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                     Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
-                    marte,luna,segundaMision = misiones.misionLuna(segundaMision,cogerPropulsor,mapa,marte,pintarFlecha,luna)
-                    misionesTexto.misionLuna(screen,segundaMision,mapa,volverNave)
+                    marte,luna,segundaMision = Misiones.misionLuna(segundaMision,cogerPropulsor,mapa,marte,pintarFlecha,luna)
+                    MisionesTexto.misionLuna(screen,segundaMision,mapa,volverNave)
                     contadorNivel = 0
         elif(faseInicial==False and luna == False and marte==True and jupiter==False and urano==False and pluton==False):
             if(salirNivelMarte==False):
@@ -633,7 +646,7 @@ async def main():
                 terceraMision=False
                 generadorAgua=False
                 paraiso = False
-                salirNivelMarte,contadorNivel = cargarMensajes.nivelMarte(salirNivelMarte,contadorNivel)
+                salirNivelMarte,contadorNivel = CargarMensajes.nivelMarte(salirNivelMarte,contadorNivel)
                 pintarNave.rect.x = 385
                 pintarNave.rect.y = 320
                 protagonistaEnPlaneta.rect.x = 500
@@ -710,13 +723,13 @@ async def main():
                     astronautaEnPlaneta.draw(screen)
                     derecha,izquierda,arriba,abajo = gestionarEventos(protagonistaEnPlaneta,derecha,izquierda,arriba,abajo,trajeAP)
                     balas,recargar = disparar(screen,protagonistaEnPlaneta,pintarBala,bala,balas,recargar)
-                    marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,primeraParaiso,segundaParaiso = cambioEscena.cambioEscenaMarte(protagonistaEnPlaneta,marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,paraiso,primeraParaiso,segundaParaiso)
+                    marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,primeraParaiso,segundaParaiso = CambioEscena.cambioEscenaMarte(protagonistaEnPlaneta,marte1,marte2,marte3,marte4,marte5,marte6,marte7,marte8,marte9,marte10,marte11,paraiso,primeraParaiso,segundaParaiso)
                     Colisiones.colisionesMarte(protagonistaEnPlaneta,pintarNave,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,primeraParaiso,segundaParaiso)
-                    bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,vida,mostrarCarta,entrarParaiso,paraiso,primeraParaiso = iteracciones.iteraccionesMarte(screen,protagonistaEnPlaneta,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,vida,bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,escenaNave1,escenaNave3,mostrarCarta,entrarParaiso,cartaParaiso1,cartaParaiso2,paraiso,primeraParaiso)
-                    paraiso,mostrarSoporte,mostrarCarta,soporteVital,vida,piezas,saquear,marte4,primeraParaiso = iteracciones.iteraccionesParaiso(screen,protagonistaEnPlaneta,paraiso,primeraParaiso,segundaParaiso,mensajeSoporteVital,soporteVital,mostrarSoporte,mostrarCarta,vida,piezas,cartaParaiso3,cartaParaiso4,saquear,marte4)
+                    bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,vida,mostrarCarta,entrarParaiso,paraiso,primeraParaiso = Iteracciones.iteraccionesMarte(screen,protagonistaEnPlaneta,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,vida,bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,escenaNave1,escenaNave3,mostrarCarta,entrarParaiso,cartaParaiso1,cartaParaiso2,paraiso,primeraParaiso)
+                    paraiso,mostrarSoporte,mostrarCarta,soporteVital,vida,piezas,saquear,marte4,primeraParaiso = Iteracciones.iteraccionesParaiso(screen,protagonistaEnPlaneta,paraiso,primeraParaiso,segundaParaiso,mensajeSoporteVital,soporteVital,mostrarSoporte,mostrarCarta,vida,piezas,cartaParaiso3,cartaParaiso4,saquear,marte4)
                     estadisticas.draw(screen)
-                    estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
-                    misionesTexto.misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escenaNave3)
+                    estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                    MisionesTexto.misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escenaNave3)
                     Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                     Frames.actualizarFrame(protagonistaEnPlaneta,derecha,izquierda,abajo,arriba)
                     if(volverNave==True):
@@ -758,20 +771,20 @@ async def main():
                             escenaNaveIzquierda.draw(screen)
                         if(escenaNave3):
                             escenaNaveAbajo.draw(screen)
-                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
+                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = Iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
                         astronauta.draw(screen)
                         derecha,izquierda,arriba,abajo = gestionarEventos(protagonista,derecha,izquierda,arriba,abajo,trajeAP)
                         balas,recargar = disparar(screen,protagonista,pintarBala,bala,balas,recargar)
                         Colisiones.colisionNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                        escenaNave1,escenaNave2,escenaNave3 = cambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                        bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,vida,mostrarCarta,entrarParaiso,paraiso,primeraParaiso = iteracciones.iteraccionesMarte(screen,protagonista,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,vida,bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,escenaNave1,escenaNave3,mostrarCarta,entrarParaiso,cartaParaiso1,cartaParaiso2,paraiso,primeraParaiso)
+                        escenaNave1,escenaNave2,escenaNave3 = CambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
+                        bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,vida,mostrarCarta,entrarParaiso,paraiso,primeraParaiso = Iteracciones.iteraccionesMarte(screen,protagonista,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,vida,bidones,piezas,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,volverNave,escenaNave1,escenaNave3,mostrarCarta,entrarParaiso,cartaParaiso1,cartaParaiso2,paraiso,primeraParaiso)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
-                        jupiter,marte,terceraMision = misiones.misionMarte(terceraMision,generadorAgua,mapa,jupiter,pintarFlecha,marte)
-                        misionesTexto.misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escenaNave3)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        jupiter,marte,terceraMision = Misiones.misionMarte(terceraMision,generadorAgua,mapa,jupiter,pintarFlecha,marte)
+                        MisionesTexto.misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escenaNave3)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
-                        generadorAgua,mostrarCarta,piezas = misiones.construirGenerador(screen,protagonista,volverNave,escenaNave3,generadorAgua,mostrarCarta,generador,piezas)
+                        generadorAgua,mostrarCarta,piezas = Misiones.construirGenerador(screen,protagonista,volverNave,escenaNave3,generadorAgua,mostrarCarta,generador,piezas)
                         if(volverNave==False):
                             protagonistaEnPlaneta.rect.y = 580
                     else:
@@ -780,13 +793,13 @@ async def main():
                         mapa=gestionarEventosMapa(pintarFlecha,mapa)
                         Colisiones.colisionesMapa(pintarFlecha)
                         Texto.mensajesMapa(screen,pintarFlecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision)
-                        iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
+                        Iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
-                        jupiter,marte,terceraMision = misiones.misionMarte(terceraMision,generadorAgua,mapa,jupiter,pintarFlecha,marte)
-                        misionesTexto.misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escenaNave3)
+                        jupiter,marte,terceraMision = Misiones.misionMarte(terceraMision,generadorAgua,mapa,jupiter,pintarFlecha,marte)
+                        MisionesTexto.misionMarte(screen,terceraMision,piezas,volverNave,mapa,entrarParaiso,soporteVital,paraiso,escenaNave3)
                         contadorNivel = 0
                         salirNivelJupiter = False
         elif(faseInicial==False and luna == False and marte==False and jupiter==True and urano==False and pluton==False):
@@ -803,7 +816,7 @@ async def main():
                 volverNave = False
                 resetear = False
                 arreglo = 100
-                salirNivelJupiter,contadorNivel = cargarMensajes.nivelJupiter(salirNivelJupiter,contadorNivel)
+                salirNivelJupiter,contadorNivel = CargarMensajes.nivelJupiter(salirNivelJupiter,contadorNivel)
                 protagonista.rect.x = 340
                 protagonista.rect.y = 150
                 naveMov.rect.x= 700
@@ -843,19 +856,19 @@ async def main():
                     if(espacio3):
                         escenaEspacio3.draw(screen)
                         naveMovimiento.draw(screen)
-                        cristal,volverNave,jupiter,finJupiter,finEntrarJupiter = iteracciones.decision(screen,naveMov,cristal,volverNave,jupiter,finJupiter,finEntrarJupiter,decision)
+                        cristal,volverNave,jupiter,finJupiter,finEntrarJupiter = Iteracciones.decision(screen,naveMov,cristal,volverNave,jupiter,finJupiter,finEntrarJupiter,decision)
                         mostrarCarta = True
                     if(espacio3==False):
                         naveMovimiento.draw(screen)
                     derecha,izquierda,arriba,abajo = gestionarEventosNave(naveMov,derecha,izquierda,arriba,abajo)
                     gestionarEventosMeteoritos(meteorito1,meteorito2,meteorito3,meteorito4)
-                    espacio1,espacio2,espacio3 = cambioEscena.cambioEscenaJupiter(naveMov,espacio1,espacio2,espacio3)
+                    espacio1,espacio2,espacio3 = CambioEscena.cambioEscenaJupiter(naveMov,espacio1,espacio2,espacio3)
                     Colisiones.colisionesNave(naveMov,espacio1,espacio3)
                     arreglo = Colisiones.colisionesConMeteorito(naveMov,meteorito1,meteorito2,meteorito4,meteorito3,arreglo,espacio1,espacio2,espacio3)
-                    misionesTexto.misionJupiter(screen,naveMov,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3)
+                    MisionesTexto.misionJupiter(screen,naveMov,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3)
                     if(arreglo>0):
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                     else:
                         finJupiter = True
@@ -871,16 +884,16 @@ async def main():
                             escenaNaveIzquierda.draw(screen)
                         if(escenaNave3):
                             escenaNaveAbajo.draw(screen)
-                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
+                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = Iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
                         astronauta.draw(screen)
                         derecha,izquierda,arriba,abajo = gestionarEventos(protagonista,derecha,izquierda,arriba,abajo,trajeAP)
                         balas,recargar = disparar(screen,protagonista,pintarBala,bala,balas,recargar)
                         Colisiones.colisionNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                        mostrarCarta,cristal,distribuidor = iteracciones.construirDistribuidor(screen,protagonista,mostrarCarta,cristal,cristalEnergia,distribuidor,distribuidorEnergia,escenaNave3)
-                        misionesTexto.misionJupiter(screen,naveMov,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3)
-                        escenaNave1,escenaNave2,escenaNave3 = cambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
+                        mostrarCarta,cristal,distribuidor = Iteracciones.construirDistribuidor(screen,protagonista,mostrarCarta,cristal,cristalEnergia,distribuidor,distribuidorEnergia,escenaNave3)
+                        MisionesTexto.misionJupiter(screen,naveMov,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3)
+                        escenaNave1,escenaNave2,escenaNave3 = CambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
                     else:
@@ -889,12 +902,12 @@ async def main():
                         mapa=gestionarEventosMapa(pintarFlecha,mapa)
                         Colisiones.colisionesMapa(pintarFlecha)
                         Texto.mensajesMapa(screen,pintarFlecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision)
-                        iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
+                        Iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
-                        cuartaMision,jupiter,urano = misiones.misionJupiter(cuartaMision,pintarFlecha,volverNave,cristal,distribuidor,mapa,jupiter,urano)
-                        misionesTexto.misionJupiter(screen,naveMov,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3)
+                        cuartaMision,jupiter,urano = Misiones.misionJupiter(cuartaMision,pintarFlecha,volverNave,cristal,distribuidor,mapa,jupiter,urano)
+                        MisionesTexto.misionJupiter(screen,naveMov,mapa,cuartaMision,volverNave,espacio3,cristal,distribuidor,escenaNave3)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
                         contadorNivel = 0
                         salirNivelUrano = False
@@ -923,7 +936,7 @@ async def main():
                 cogerBidon = False
                 cogerPieza = False
                 resetear = False
-                salirNivelUrano,contadorNivel = cargarMensajes.nivelUrano(salirNivelUrano,contadorNivel)
+                salirNivelUrano,contadorNivel = CargarMensajes.nivelUrano(salirNivelUrano,contadorNivel)
                 if(salirNivelUrano==True):
                     if(secretoLuna==True):
                         gasolina-=35
@@ -953,24 +966,24 @@ async def main():
                         escenaUrano2.draw(screen)
                         if(cogerPieza==False):
                             pieza.draw(screen)
-                        cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera = iteracciones.mostrarHidrogeno(screen,protagonistaEnPlaneta,bolaHidrogeno,pintarHidrogeno,cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera)
+                        cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera = Iteracciones.mostrarHidrogeno(screen,protagonistaEnPlaneta,bolaHidrogeno,pintarHidrogeno,cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera)
                     if(urano3==True):
                         escenaUrano3.draw(screen)
                         if(cogerBidon==False):
                             bidon.draw(screen)
-                        cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera = iteracciones.mostrarHidrogeno(screen,protagonistaEnPlaneta,bolaHidrogeno,pintarHidrogeno,cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera)
+                        cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera = Iteracciones.mostrarHidrogeno(screen,protagonistaEnPlaneta,bolaHidrogeno,pintarHidrogeno,cogerHidrogeno,hidrogeno,contadorHidrogeno,contadorEspera)
 
                     if(urano4==True):
                         escenaUrano4.draw(screen)
                     astronautaEnPlaneta.draw(screen)
                     derecha,izquierda,arriba,abajo = gestionarEventos(protagonistaEnPlaneta,derecha,izquierda,arriba,abajo,trajeAP)
                     balas,recargar = disparar(screen,protagonistaEnPlaneta,pintarBala,bala,balas,recargar)
-                    urano1,urano2,urano3,urano4 = cambioEscena.cambioEscenaUrano(protagonistaEnPlaneta,urano1,urano2,urano3,urano4)
+                    urano1,urano2,urano3,urano4 = CambioEscena.cambioEscenaUrano(protagonistaEnPlaneta,urano1,urano2,urano3,urano4)
                     Colisiones.colisionesUrano(protagonistaEnPlaneta,pintarNave,urano1,urano2,urano3,urano4)
-                    cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1 = iteracciones.iteraccionesUrano(screen,protagonistaEnPlaneta,urano1,urano2,urano3,urano4,cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1)
-                    misionesTexto.misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3)
+                    cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1 = Iteracciones.iteraccionesUrano(screen,protagonistaEnPlaneta,urano1,urano2,urano3,urano4,cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1)
+                    MisionesTexto.misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3)
                     estadisticas.draw(screen)
-                    estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                    estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                     Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                     Frames.actualizarFrame(protagonistaEnPlaneta,derecha,izquierda,abajo,arriba)
                     if(volverNave==True):
@@ -997,18 +1010,18 @@ async def main():
                             escenaNaveIzquierda.draw(screen)
                         if(escenaNave3):
                             escenaNaveAbajo.draw(screen)
-                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
+                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = Iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
                         astronauta.draw(screen)
                         derecha,izquierda,arriba,abajo = gestionarEventos(protagonista,derecha,izquierda,arriba,abajo,trajeAP)
                         balas,recargar = disparar(screen,protagonista,pintarBala,bala,balas,recargar)
                         Colisiones.colisionNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                        cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1 = iteracciones.iteraccionesUrano(screen,protagonista,urano1,urano2,urano3,urano4,cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1)
-                        mostrarCarta,trajeAP,hidrogeno = iteracciones.construirTraje(screen,protagonista,trajeAP,trajeAntiPresion,hidrogeno,mostrarCarta,escenaNave3)
-                        misionesTexto.misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3)
-                        quintaMision,urano,pluton=misiones.misionUrano(quintaMision,pintarFlecha,volverNave,trajeAP,mapa,urano,pluton)
-                        escenaNave1,escenaNave2,escenaNave3 = cambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
+                        cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1 = Iteracciones.iteraccionesUrano(screen,protagonista,urano1,urano2,urano3,urano4,cogerBidon,cogerPieza,piezas,bidones,vida,volverNave,escenaNave1)
+                        mostrarCarta,trajeAP,hidrogeno = Iteracciones.construirTraje(screen,protagonista,trajeAP,trajeAntiPresion,hidrogeno,mostrarCarta,escenaNave3)
+                        MisionesTexto.misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3)
+                        quintaMision,urano,pluton=Misiones.misionUrano(quintaMision,pintarFlecha,volverNave,trajeAP,mapa,urano,pluton)
+                        escenaNave1,escenaNave2,escenaNave3 = CambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
                         if(volverNave==False):
@@ -1019,11 +1032,11 @@ async def main():
                         mapa=gestionarEventosMapa(pintarFlecha,mapa)
                         Colisiones.colisionesMapa(pintarFlecha)
                         Texto.mensajesMapa(screen,pintarFlecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision)
-                        iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
-                        quintaMision,urano,pluton=misiones.misionUrano(quintaMision,pintarFlecha,volverNave,trajeAP,mapa,urano,pluton)
-                        misionesTexto.misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3)
+                        Iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
+                        quintaMision,urano,pluton=Misiones.misionUrano(quintaMision,pintarFlecha,volverNave,trajeAP,mapa,urano,pluton)
+                        MisionesTexto.misionUrano(screen,quintaMision,mapa,hidrogeno,trajeAP,volverNave,escenaNave3)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
                         contadorNivel = 0
@@ -1044,7 +1057,7 @@ async def main():
                 antagonista.rect.x=200
                 vodaJefe=100
                 resetear = False
-                salirNivelPluton,contadorNivel = cargarMensajes.nivelPluton(salirNivelPluton,contadorNivel)
+                salirNivelPluton,contadorNivel = CargarMensajes.nivelPluton(salirNivelPluton,contadorNivel)
                 if(salirNivelPluton==True):
                     if(secretoLuna==True):
                         gasolina-=20
@@ -1071,8 +1084,8 @@ async def main():
                         if(vidaJefe>0):
                             jefe.draw(screen)
                             Frames.actualizarFrameJefe(antagonista,derechaJefe,izquierdaJefe,0,0)
-                            contadorDisparo,disparoMaligno,vidaJefe,disparo,vida,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,balas = iteracciones.combate(screen,protagonistaEnPlaneta,antagonista,vidaJefe,pintarBala,disparo,contadorDisparo,disparoMaligno,balaOscura,pintarBalaOscura,vida,crearMira,crearExplosion,pintarMira,pintarExplosion,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,soporteVital,balas,pintarMedicamento,crearMedicamento)
-                            iteracciones.movimientoJefe(antagonista,derechaJefe,izquierdaJefe,vidaJefe)
+                            contadorDisparo,disparoMaligno,vidaJefe,disparo,vida,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,balas = Iteracciones.combate(screen,protagonistaEnPlaneta,antagonista,vidaJefe,pintarBala,disparo,contadorDisparo,disparoMaligno,balaOscura,pintarBalaOscura,vida,crearMira,crearExplosion,pintarMira,pintarExplosion,ataqueEspecial,contadorAtaqueEspecial,contadorMira,contadorExplosion,derechaJefe,izquierdaJefe,soporteVital,balas,pintarMedicamento,crearMedicamento)
+                            Iteracciones.movimientoJefe(antagonista,derechaJefe,izquierdaJefe,vidaJefe)
                             contadorMensaje = Texto.hemorragia(screen,vidaJefe,contadorMensaje)
                             contadorMensaje = Texto.explosion(screen,vidaJefe,contadorMensaje)
                         if(vidaJefe<=0 and contadorNivel==200):
@@ -1084,8 +1097,8 @@ async def main():
                     astronautaEnPlaneta.draw(screen)
                     derecha,izquierda,arriba,abajo = gestionarEventos(protagonistaEnPlaneta,derecha,izquierda,arriba,abajo,trajeAP)
                     balas,recargar = disparar(screen,protagonistaEnPlaneta,pintarBala,bala,balas,recargar)
-                    volverNave = iteracciones.entrarNavePluton(screen,protagonistaEnPlaneta,pluton1,volverNave,escenaNave1)
-                    pluton1,pluton2 = cambioEscena.cambioEscenaPluton(protagonistaEnPlaneta,pluton1,pluton2)
+                    volverNave = Iteracciones.entrarNavePluton(screen,protagonistaEnPlaneta,pluton1,volverNave,escenaNave1)
+                    pluton1,pluton2 = CambioEscena.cambioEscenaPluton(protagonistaEnPlaneta,pluton1,pluton2)
                     Colisiones.colisionesPluton(protagonistaEnPlaneta,pintarNave,pluton1,pluton2)
                     if(vida<0.5):
                         finPluton = True
@@ -1098,7 +1111,7 @@ async def main():
                             gasolina+=30
                     else:
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonistaEnPlaneta,derecha,izquierda,abajo,arriba)
                 else:
@@ -1109,15 +1122,15 @@ async def main():
                             escenaNaveIzquierda.draw(screen)
                         if(escenaNave3):
                             escenaNaveAbajo.draw(screen)
-                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
+                        balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa = Iteracciones.iteraccionesNave(screen,protagonista,balas,gasolina,bidones,arreglo,piezas,vida,escenaNave1,escenaNave2,escenaNave3,contadorIteraccion,mapa,distribuidor)
                         astronauta.draw(screen)
                         derecha,izquierda,arriba,abajo = gestionarEventos(protagonista,derecha,izquierda,arriba,abajo,trajeAP)
                         balas,recargar = disparar(screen,protagonista,pintarBala,bala,balas,recargar)
                         Colisiones.colisionNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                        escenaNave1,escenaNave2,escenaNave3 = cambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
-                        volverNave = iteracciones.entrarNavePluton(screen,protagonista,pluton1,volverNave,escenaNave1)
+                        escenaNave1,escenaNave2,escenaNave3 = CambioEscena.cambioEcenaNave(protagonista,escenaNave1,escenaNave2,escenaNave3)
+                        volverNave = Iteracciones.entrarNavePluton(screen,protagonista,pluton1,volverNave,escenaNave1)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
                         if(volverNave==False):
@@ -1128,14 +1141,14 @@ async def main():
                         mapa=gestionarEventosMapa(pintarFlecha,mapa)
                         Colisiones.colisionesMapa(pintarFlecha)
                         Texto.mensajesMapa(screen,pintarFlecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision)
-                        iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
+                        Iteracciones.iteraccionesMapa(screen,pintarFlecha,infoSol,infoMercurio,infoVenus,infoTierra,infoMarte,infoJupiter,infoSaturno,infoUrano,infoNeptuno,infoPluton)
                         estadisticas.draw(screen)
-                        estadisticas = cargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
+                        estadisticas = CargarImagen.colocarStats(estadisticas,gasolina,arreglo,vida,balas,bidones,piezas)
                         Texto.mensajesHUD(screen,gasolina,arreglo,vida,balas,bidones,piezas)
                         Frames.actualizarFrame(protagonista,derecha,izquierda,abajo,arriba)
         elif(pluton==False and vidaJefe<=0):
             ganacion.draw(screen)
-            funcionando,contadorNivel = cargarMensajes.mensajeGanar(funcionando,contadorNivel)
+            funcionando,contadorNivel = CargarMensajes.mensajeGanar(funcionando,contadorNivel)
 
         pygame.display.flip()
         await asyncio.sleep(0)

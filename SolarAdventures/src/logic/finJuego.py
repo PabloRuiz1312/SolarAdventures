@@ -1,5 +1,5 @@
 import pygame
-class gameOvers:
+class GameOvers:
 
     def empezarPorVida(nivel,planeta,contadorNivel,resetear,vida,funcionando):
         teclaPulsada = pygame.key.get_pressed()

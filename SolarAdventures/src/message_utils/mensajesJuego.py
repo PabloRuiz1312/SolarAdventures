@@ -1,6 +1,10 @@
 import pygame
 class Texto:
-    def mensajesHUD(screen,gasolina,arreglos,vida,balas,bidones,piezas):
+
+    def __init__(self):
+        pass
+    #Funcion para crear el HUD en el juego
+    def mensajesHUD(self,screen,gasolina,arreglos,vida,balas,bidones,piezas):
         blanco = pygame.Color(255,255,255)
         fraseInteractuar = pygame.font.Font(None,50)
         fraseIteraccion = pygame.font.Font(None,35)
@@ -34,8 +38,8 @@ class Texto:
         colocarEstadoPersonaje  =  "ESTADO PERSONAJE"
         transmitirEstadoPersonaje = fraseInteractuar.render(colocarEstadoPersonaje,1,blanco)
         screen.blit(transmitirEstadoPersonaje,(815,250))
-    
-    def mensajesIteraccionesNave(screen,protagonista,escena1,escena2,escena3):
+    #Funcion para crear las iteracciones en la nave
+    def mensajesIteraccionesNave(self,screen,protagonista,escena1,escena2,escena3):
         blanco = pygame.Color(255,255,255)
         fraseIteraccion = pygame.font.Font(None,35)
         if(protagonista.rect.x>540 and protagonista.rect.x<590 and protagonista.rect.y>100 and protagonista.rect.y<360 and escena3==True):
@@ -58,7 +62,7 @@ class Texto:
             Interaccion = "Pulse e para pilotar la nave"
             transmitir = fraseIteraccion.render(Interaccion,1,blanco)
             screen.blit(transmitir,(830,760))
-    def mensajesMapa(screen,flecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision):
+    def mensajesMapa(self,screen,flecha,primeraMision,segundaMision,terceraMision,cuartaMision,quintaMision):
         blanco = pygame.Color(255,255,255)
         fraseIteraccion = pygame.font.Font(None,35)
         mensajeEscape = "PULSA ESC PARA SALIR DEL MAPA"
@@ -94,7 +98,7 @@ class Texto:
             transmitir = fraseIteraccion.render(Interaccion,1,blanco)
             screen.blit(transmitir,(830,760))
         
-    def mensajesIteraccionesLuna(screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escena1,cogerPieza,cogerBidon,cogerPropulsor,secretoLuna):
+    def mensajesIteraccionesLuna(self,screen,protagonista,volverNave,luna1,luna2,luna3,luna4,luna5,luna6,escena1,cogerPieza,cogerBidon,cogerPropulsor,secretoLuna):
         blanco = pygame.Color(255,255,255)
         fraseIteraccion = pygame.font.Font(None,35)
         if(protagonista.rect.y>430 and protagonista.rect.y<470 and protagonista.rect.x>530 and protagonista.rect.x<620 and luna1==True):
@@ -122,7 +126,7 @@ class Texto:
             transmitir = fraseIteraccion.render(Interaccion,1,blanco)
             screen.blit(transmitir,(975,760))
 
-    def mensajesIteraccionesMarte(screen,protagonista,volverNave,escena1,escena3,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,entrarParaiso,piezas):
+    def mensajesIteraccionesMarte(self,screen,protagonista,volverNave,escena1,escena3,marte1,marte2,marte3,marte4,marte5,marte6,marte8,marte9,marte10,marte11,cogerBidon,cogerBidon2,cogerPieza,cogerPieza2,cogerPieza3,cogerPieza4,entrarParaiso,piezas):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(volverNave==False):
@@ -208,7 +212,7 @@ class Texto:
                 transmitir = fraseIteraccion.render(Interaccion,1,blanco)
                 screen.blit(transmitir,(820,760))
 
-    def mensajesParaiso(screen,protagonista,primeraParaiso,segundaParaiso,saquear,soporteVital):
+    def mensajesParaiso(self,screen,protagonista,primeraParaiso,segundaParaiso,saquear,soporteVital):
         blanco = pygame.Color(255,255,255)
         fraseIteraccion = pygame.font.Font(None,35)
         if(primeraParaiso):
@@ -234,7 +238,7 @@ class Texto:
                 Transmitir = fraseIteraccion.render(Interaccion,1,blanco)
                 screen.blit(Transmitir,(830,760))
 
-    def mensajeCristal(screen,protagonista,cristal,distribuidor,escena3):
+    def mensajeCristal(self,screen,protagonista,cristal,distribuidor,escena3):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(cristal==True and escena3==True):
@@ -243,7 +247,7 @@ class Texto:
                 transmitir = fraseIteraccion.render(Interaccion,1,blanco)
                 screen.blit(transmitir,(815,760))
 
-    def cogerHidrogeno(screen,protagonista,pintarHidrogeno,cogerHidrogeno):
+    def cogerHidrogeno(self,screen,protagonista,pintarHidrogeno,cogerHidrogeno):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(protagonista.rect.x>(pintarHidrogeno.rect.x-70) and protagonista.rect.x<(pintarHidrogeno.rect.x+70) and protagonista.rect.y>(pintarHidrogeno.rect.y-70) and protagonista.rect.y<(pintarHidrogeno.rect.y+70) and cogerHidrogeno==True):
@@ -251,7 +255,7 @@ class Texto:
             transmitir = fraseIteraccion.render(Interaccion,1,blanco)
             screen.blit(transmitir,(815,760))
 
-    def mensajesUrano(screen,protagonista,urano1,urano2,urano3,urano4,cogerPieza,cogerBidon,volverNave,escenaNave1):
+    def mensajesUrano(self,screen,protagonista,urano1,urano2,urano3,urano4,cogerPieza,cogerBidon,volverNave,escenaNave1):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(urano1):
@@ -284,7 +288,7 @@ class Texto:
                 transmitir = fraseIteraccion.render(Interaccion,1,blanco)
                 screen.blit(transmitir,(830,760)) 
     
-    def mensajeTraje(screen,protagonista,hidrogeno,trajeAP,escenaNave3):
+    def mensajeTraje(self,screen,protagonista,hidrogeno,trajeAP,escenaNave3):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(hidrogeno>=5 and escenaNave3==True):
@@ -292,7 +296,7 @@ class Texto:
                 Interaccion = "Pulse e para crear el traje"
                 transmitir = fraseIteraccion.render(Interaccion,1,blanco)
                 screen.blit(transmitir,(815,760))
-    def mensajeMedicamento(screen,protagonista,vidaJefe,vida):
+    def mensajeMedicamento(self,screen,protagonista,vidaJefe,vida):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(protagonista.rect.x>350 and protagonista.rect.x<480 and protagonista.rect.y>350 and protagonista.rect.y<480 and vida<50):
@@ -304,7 +308,7 @@ class Texto:
             Transmitir = fraseIteraccion.render(Interaccion,1,blanco)
             screen.blit(Transmitir,(855,640))
 
-    def mensajesNavePluton(screen,protagonista,volverNave,escenaNave1,pluton1):
+    def mensajesNavePluton(self,screen,protagonista,volverNave,escenaNave1,pluton1):
         fraseIteraccion = pygame.font.Font(None,35)
         blanco = pygame.Color(255,255,255)
         if(protagonista.rect.y>635 and protagonista.rect.y<670 and protagonista.rect.x>335 and protagonista.rect.x<415 and pluton1==True):
@@ -316,7 +320,7 @@ class Texto:
             transmitir = fraseIteraccion.render(Interaccion,1,blanco)
             screen.blit(transmitir,(830,760)) 
 
-    def explosion(screen,vidaJefe,contadorMensaje):
+    def explosion(self,screen,vidaJefe,contadorMensaje):
         fraseIteraccion = pygame.font.Font(None,125)
         rojo = pygame.Color(255,150,0)
         if(vidaJefe<=60 and vidaJefe>30 and contadorMensaje!=200):
@@ -325,7 +329,7 @@ class Texto:
             screen.blit(transmitir,(90,480))
             contadorMensaje+=1
         return contadorMensaje
-    def hemorragia(screen,vidaJefe,contadorMensaje):
+    def hemorragia(self,screen,vidaJefe,contadorMensaje):
         fraseIteraccion = pygame.font.Font(None,125)
         rojo = pygame.Color(255,0,0)
         if(vidaJefe<=30 and contadorMensaje!=400):
